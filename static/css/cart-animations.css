@@ -1,0 +1,78 @@
+.product-card {
+    transition: all 0.3s ease-in-out;
+}
+
+.product-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.animated-btn {
+    transition: all 0.2s ease-in-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.animated-btn:hover {
+    transform: translateY(-2px);
+}
+
+.animated-btn:active {
+    transform: translateY(0);
+}
+
+.decrease-btn:hover, .increase-btn:hover {
+    background-color: #f3f4f6;
+}
+
+.checkout-btn {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.checkout-btn:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.checkout-btn:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: 0.5s;
+}
+
+.checkout-btn:hover:before {
+    left: 100%;
+}
+
+/* Quantity input styling */
+input[type="number"].quantity-input {
+    -moz-appearance: textfield;
+}
+
+input[type="number"].quantity-input::-webkit-outer-spin-button,
+input[type="number"].quantity-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Remove button animation */
+.ml-6.animated-btn:hover svg {
+    color: #ef4444;
+    transform: scale(1.2);
+}
+
+/* Order summary animations */
+.order-summary {
+    transition: all 0.3s ease;
+}
+
+.order-summary:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}

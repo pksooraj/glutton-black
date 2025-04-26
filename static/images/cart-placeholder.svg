@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#1c1c1c"/>
+  <text x="400" y="300" font-family="Arial" font-size="32" fill="#ffffff" text-anchor="middle" dominant-baseline="middle">CART ITEM PLACEHOLDER</text>
+  <rect x="200" y="350" width="400" height="60" fill="none" stroke="#ffffff" stroke-width="2"/>
+  <text x="400" y="385" font-family="Arial" font-size="18" fill="#ffffff" text-anchor="middle" dominant-baseline="middle">Premium Black T-shirt</text>
+</svg>

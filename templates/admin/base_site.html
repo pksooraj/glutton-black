@@ -1,0 +1,77 @@
+{% extends 'admin/base_site.html' %}
+{% load static %}
+
+{% block title %}{{ title }} | Black T-shirts Admin{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">
+    <a href="{% url 'admin:index' %}" class="brand">
+        <span class="brand-icon">👕</span> Black T-shirts Administration
+    </a>
+</h1>
+<div class="user-tools-wrapper">
+    {% block usertools %}
+    {{ block.super }}
+    {% endblock %}
+</div>
+{% endblock %}
+
+{% block nav-global %}
+<div class="global-nav">
+    <a href="{% url 'admin:shop_products_product_changelist' %}" class="nav-item">Products</a>
+    <a href="{% url 'admin:shop_orders_order_changelist' %}" class="nav-item">Orders</a>
+    <a href="{% url 'admin:shop_products_wishlistitem_changelist' %}" class="nav-item">Wishlists</a>
+</div>
+{% endblock %}
+
+{% block extrastyle %}
+<style>
+    :root {
+        --primary: #212121;
+        --secondary: #757575;
+        --accent: #424242;
+        --primary-fg: #fff;
+    }
+    
+    /* Header */
+    #header {
+        background: var(--primary);
+        color: var(--primary-fg);
+    }
+    
+    #header a:link, #header a:visited {
+        color: var(--primary-fg);
+    }
+    
+    /* Module headers */
+    .module h2, .module caption {
+        background: var(--accent);
+    }
+    
+    /* Links */
+    a:link, a:visited {
+        color: var(--primary);
+    }
+    
+    a:hover {
+        color: var(--secondary);
+    }
+    
+    /* Buttons */
+    .button, input[type=submit], input[type=button], .submit-row input {
+        background: var(--primary);
+    }
+    
+    .button:hover, input[type=submit]:hover, input[type=button]:hover {
+        background: var(--secondary);
+    }
+    
+    .button.default, input[type=submit].default {
+        background: var(--accent);
+    }
+    
+    .button.default:hover, input[type=submit].default:hover {
+        background: var(--secondary);
+    }
+</style>
+{% endblock %}

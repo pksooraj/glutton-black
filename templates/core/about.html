@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Us | BLACK - Premium T-shirts{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="relative h-64 md:h-80 flex items-center justify-center bg-black text-white overflow-hidden mb-12">
+    <div class="absolute inset-0 z-0">
+        <img src="{% static 'images/about-hero.svg' %}" alt="BLACK - About Us" class="w-full h-full object-cover">
+    </div>
+    <div class="container mx-auto px-4 z-10 text-center" data-aos="fade-up">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">ABOUT BLACK</h1>
+        <p class="text-xl max-w-2xl mx-auto">Our story, our commitment, our passion</p>
+    </div>
+</section>
+
+<div class="container mx-auto px-4 py-12">
+    <div class="max-w-5xl mx-auto">
+        
+        <div class="flex flex-col md:flex-row items-center bg-gray-100 p-8 rounded-lg shadow-md mb-12" data-aos="fade-up">
+            <div class="md:w-1/2 mb-6 md:mb-0 md:pr-8">
+                <img src="{% static 'images/about-story.svg' %}" alt="Our Story" class="w-full h-auto rounded-lg shadow-md">
+            </div>
+            <div class="md:w-1/2">
+                <h2 class="text-2xl font-semibold mb-4">Our Story</h2>
+                <p class="mb-4">Founded in 2023, BLACK is a premium t-shirt brand focused exclusively on creating the perfect black t-shirt. We believe that a well-crafted black t-shirt is an essential part of any wardrobe - versatile, timeless, and effortlessly stylish.</p>
+                <p class="mb-4">Our mission is simple: to create black t-shirts of exceptional quality that look great, feel comfortable, and last for years. We've obsessed over every detail, from the fabric weight to the stitching, to ensure our shirts meet the highest standards.</p>
+                <p>What began as a passion project has grown into a brand trusted by customers who value quality, simplicity, and style.</p>
+            </div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12" data-aos="fade-up" data-aos-delay="100">
+            <div class="bg-gray-100 p-8 rounded-lg shadow-md flex flex-col">
+                <div class="mb-6">
+                    <img src="{% static 'images/about-quality.svg' %}" alt="Quality Materials" class="w-full h-auto rounded-lg shadow-md mb-4">
+                </div>
+                <h2 class="text-2xl font-semibold mb-4">Quality Materials</h2>
+                <p>We use only premium 100% organic cotton, ethically sourced and carefully selected for softness, durability, and color retention. Our shirts are pre-shrunk and designed to maintain their shape and rich black color through countless washes.</p>
+            </div>
+            <div class="bg-gray-100 p-8 rounded-lg shadow-md flex flex-col">
+                <div class="mb-6">
+                    <img src="{% static 'images/about-sustainability.svg' %}" alt="Sustainable Practices" class="w-full h-auto rounded-lg shadow-md mb-4">
+                </div>
+                <h2 class="text-2xl font-semibold mb-4">Sustainable Practices</h2>
+                <p>We're committed to minimizing our environmental impact. Our production processes use less water, our packaging is made from recycled materials, and we partner with suppliers who share our commitment to sustainability.</p>
+                <p class="mt-2">By choosing BLACK, you're supporting a brand that values the planet as much as quality and style.</p>
+            </div>
+        </div>
+        
+        <div class="flex flex-col md:flex-row items-center bg-gray-100 p-8 rounded-lg shadow-md mb-12" data-aos="fade-up" data-aos-delay="200">
+            <div class="md:w-1/2 mb-6 md:mb-0 md:pr-8 order-1 md:order-2">
+                <img src="{% static 'images/about-custom.svg' %}" alt="Custom Designs" class="w-full h-auto rounded-lg shadow-md">
+            </div>
+            <div class="md:w-1/2 order-2 md:order-1">
+                <h2 class="text-2xl font-semibold mb-4">Custom Designs</h2>
+                <p class="mb-4">What sets us apart is our custom design service. We believe that personalization shouldn't come at the expense of quality. That's why we offer the ability to add your own designs to our premium black t-shirts, giving you the perfect combination of quality and individuality.</p>
+                <p class="mb-4">Whether you're looking for a classic black tee or want to express yourself with a custom design, BLACK has you covered.</p>
+                <div class="mt-6">
+                    <a href="{% url 'shop_products:product_list' %}" class="inline-block bg-black text-white px-6 py-3 rounded-none hover:bg-gray-800 transition duration-300">Shop Our Collection</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

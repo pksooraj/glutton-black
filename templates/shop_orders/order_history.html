@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Order History | Black T-shirt Designer{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-12">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl font-bold mb-8">Your Orders</h1>
+        
+        {% if orders %}
+            <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-300">
+                        <thead>
+                            <tr>
+                                <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Order #</th>
+                                <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Date</th>
+                                <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Status</th>
+                                <th class="px-4 py-3 text-right text-sm font-semibold text-gray-700">Total</th>
+                                <th class="px-4 py-3 text-center text-sm font-semibold text-gray-700">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            {% for order in orders %}
+                            <tr>
+                                <td class="px-4 py-4">#{{ order.id }}</td>
+                                <td class="px-4 py-4">{{ order.created_at|date:"F j, Y" }}</td>
+                                <td class="px-4 py-4">
+                                    <span class="px-2 py-1 rounded-full text-xs {% if order.status == 'delivered' %}bg-green-100 text-green-800{% elif order.status == 'cancelled' %}bg-red-100 text-red-800{% else %}bg-blue-100 text-blue-800{% endif %}">{{ order.get_status_display }}</span>
+                                </td>
+                                <td class="px-4 py-4 text-right">${{ order.total_cost }}</td>
+                                <td class="px-4 py-4 text-center">
+                                    <a href="{% url 'shop_orders:order_detail' order.id %}" class="text-blue-600 hover:text-blue-800 transition duration-300">View Details</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        {% else %}
+            <div class="bg-gray-100 p-8 rounded-lg shadow-md text-center">
+                <svg class="h-16 w-16 text-gray-400 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                </svg>
+                <h2 class="text-2xl font-semibold mb-4">No Orders Yet</h2>
+                <p class="text-gray-600 mb-6">You haven't placed any orders yet. Start shopping to see your orders here.</p>
+                <a href="{% url 'shop_products:product_list' %}" class="bg-black text-white px-6 py-3 rounded-md hover:bg-gray-800 transition duration-300">Shop Now</a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

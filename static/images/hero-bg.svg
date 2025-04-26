@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <rect width="1200" height="800" fill="#111111"/>
+  <text x="600" y="400" font-family="Arial" font-size="48" fill="#ffffff" text-anchor="middle" dominant-baseline="middle">BLACK T-SHIRT HERO IMAGE</text>
+  <rect x="400" y="450" width="400" height="100" fill="none" stroke="#ffffff" stroke-width="2"/>
+  <text x="600" y="500" font-family="Arial" font-size="24" fill="#ffffff" text-anchor="middle" dominant-baseline="middle">Premium Quality</text>
+</svg>

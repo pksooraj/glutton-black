@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
+  <rect width="400" height="400" fill="#000000"/>
+  <text x="200" y="200" font-family="Arial" font-size="24" fill="white" text-anchor="middle" dominant-baseline="middle">BLACK T-SHIRT</text>
+  <text x="200" y="240" font-family="Arial" font-size="16" fill="white" text-anchor="middle" dominant-baseline="middle">Minimalist Style #1</text>
+  <rect x="100" y="100" width="200" height="80" stroke="white" stroke-width="2" fill="none"/>
+</svg>

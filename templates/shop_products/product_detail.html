@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_js %}
+<script src="{% static 'js/product.js' %}"></script>
+{% endblock %}
+
+{% block title %}{{ product.name }} - BLACK{% endblock %}
+
+{% block content %}
+<!-- Product Detail Section -->
+<section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row -mx-4">
+            <!-- Product Image -->
+            <div class="md:w-1/2 px-4 mb-8 md:mb-0" data-aos="fade-right">
+                <div class="sticky top-24">
+                    {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-full h-auto object-cover shadow-lg rounded">
+                    {% else %}
+                    <img src="{% static 'images/product-1.jpg' %}" alt="{{ product.name }}" class="w-full h-auto object-cover shadow-lg rounded">
+                    {% endif %}
+                </div>
+            </div>
+            
+            <!-- Product Info -->
+            <div class="md:w-1/2 px-4" data-aos="fade-left">
+                <h1 class="text-3xl font-bold mb-4 hero-text">{{ product.name }}</h1>
+                <p class="text-2xl font-medium mb-6 hero-text">${{ product.price }}</p>
+                
+                <div class="mb-8" data-aos="fade-up" data-aos-delay="100">
+                    <h2 class="text-lg font-medium mb-2">Description</h2>
+                    <p class="text-gray-700">{{ product.description }}</p>
+                </div>
+                
+                <form method="post" action="{% url 'shop_cart:add_to_cart' product.id %}" id="product-form">
+                    {% csrf_token %}
+                    <div class="mb-8" data-aos="fade-up" data-aos-delay="150">
+                        <h2 class="text-lg font-medium mb-4">Size</h2>
+                        <div class="flex space-x-4">
+                            <label class="size-option">
+                                <input type="radio" name="size" value="S" class="hidden">
+                                <span class="w-12 h-12 border border-gray-300 flex items-center justify-center hover:bg-black hover:text-white transition duration-300 animated-btn cursor-pointer">S</span>
+                            </label>
+                            <label class="size-option">
+                                <input type="radio" name="size" value="M" class="hidden" checked>
+                                <span class="w-12 h-12 border border-gray-300 flex items-center justify-center bg-black text-white transition duration-300 animated-btn cursor-pointer">M</span>
+                            </label>
+                            <label class="size-option">
+                                <input type="radio" name="size" value="L" class="hidden">
+                                <span class="w-12 h-12 border border-gray-300 flex items-center justify-center hover:bg-black hover:text-white transition duration-300 animated-btn cursor-pointer">L</span>
+                            </label>
+                            <label class="size-option">
+                                <input type="radio" name="size" value="XL" class="hidden">
+                                <span class="w-12 h-12 border border-gray-300 flex items-center justify-center hover:bg-black hover:text-white transition duration-300 animated-btn cursor-pointer">XL</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-8" data-aos="fade-up" data-aos-delay="200">
+                        <h2 class="text-lg font-medium mb-4">Quantity</h2>
+                        <div class="flex items-center">
+                            <button type="button" class="quantity-btn w-10 h-10 border border-gray-300 flex items-center justify-center animated-btn" data-action="decrease">-</button>
+                            <input type="number" name="quantity" value="1" min="1" class="w-16 h-10 border-t border-b border-gray-300 text-center">
+                            <button type="button" class="quantity-btn w-10 h-10 border border-gray-300 flex items-center justify-center animated-btn" data-action="increase">+</button>
+                        </div>
+                    </div>
+                    
+                    <div class="flex space-x-4" data-aos="fade-up" data-aos-delay="300">
+                        <button type="submit" class="bg-black text-white px-8 py-3 hover:bg-gray-800 transition duration-300 flex-grow animated-btn">Add to Cart</button>
+                    </div>
+                </form>
+                
+                <div class="mt-4" data-aos="fade-up" data-aos-delay="350">
+                    {% if in_wishlist %}
+                    <form method="post" action="{% url 'shop_products:remove_from_wishlist' product.id %}" class="inline">
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{% url 'shop_products:product_detail' product.id %}">
+                        <button type="submit" class="border border-black px-8 py-3 hover:bg-black hover:text-white transition duration-300 animated-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                            </svg>
+                            Remove from Wishlist
+                        </button>
+                    </form>
+                    {% else %}
+                    <form method="post" action="{% url 'shop_products:add_to_wishlist' product.id %}" class="inline">
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{% url 'shop_products:product_detail' product.id %}">
+                        <button type="submit" class="border border-black px-8 py-3 hover:bg-black hover:text-white transition duration-300 animated-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                            </svg>
+                            Add to Wishlist
+                        </button>
+                    </form>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Related Products -->
+<section class="py-16 bg-gray-100">
+    <div class="container mx-auto px-4">
+        <h2 class="text-2xl font-bold mb-8" data-aos="fade-up">You May Also Like</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {% for i in "123"|make_list %}
+            <div class="group hover:shadow-lg transition-shadow duration-300 p-4 product-card" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:'100' }}">
+                <div class="relative overflow-hidden mb-4">
+                    <img src="{% static 'images/product-'|add:i|add:'.svg' %}" alt="Related Product" class="w-full h-64 object-cover transition duration-500 transform rounded">
+                    <div class="absolute inset-0 bg-black bg-opacity-0 transition duration-300 flex items-center justify-center opacity-0 card-overlay">
+                        <a href="{% url 'shop_products:product_detail' forloop.counter %}" class="bg-white text-black px-6 py-2 transform translate-y-4 transition duration-300 animated-btn">View Details</a>
+                    </div>
+                </div>
+                <h3 class="text-lg font-medium mb-2">Black T-shirt Design {{ i }}</h3>
+                <p class="text-gray-700 font-bold">$29.99</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

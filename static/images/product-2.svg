@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000" viewBox="0 0 800 1000">
+  <rect width="800" height="1000" fill="#1a1a1a"/>
+  <text x="400" y="500" font-family="Arial" font-size="36" fill="#ffffff" text-anchor="middle" dominant-baseline="middle">BLACK T-SHIRT DESIGN 2</text>
+  <rect x="250" y="550" width="300" height="80" fill="none" stroke="#ffffff" stroke-width="2"/>
+  <text x="400" y="590" font-family="Arial" font-size="20" fill="#ffffff" text-anchor="middle" dominant-baseline="middle">Urban Collection</text>
+</svg>

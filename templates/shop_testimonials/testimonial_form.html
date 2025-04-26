@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Share Your Experience | BLACK{% endblock %}
+
+{% block content %}
+<!-- Form Header -->
+<section class="py-16 bg-black text-white">
+    <div class="container mx-auto px-4 text-center">
+        <h1 class="text-4xl font-bold mb-4">SHARE YOUR EXPERIENCE</h1>
+        <p class="text-xl max-w-2xl mx-auto">We value your feedback. Let us know what you think about our products.</p>
+    </div>
+</section>
+
+<!-- Testimonial Form -->
+<section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+        <div class="max-w-2xl mx-auto bg-gray-50 p-8 rounded-lg shadow-md">
+            <form method="post" enctype="multipart/form-data" class="space-y-6">
+                {% csrf_token %}
+                
+                {% if form.errors %}
+                <div class="bg-red-50 border-l-4 border-red-500 p-4 mb-6">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="ml-3">
+                            <h3 class="text-sm font-medium text-red-800">Please correct the errors below:</h3>
+                            <div class="mt-2 text-sm text-red-700">
+                                {{ form.errors }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                
+                <!-- Name Field -->
+                <div>
+                    <label for="{{ form.name.id_for_label }}" class="block text-sm font-medium text-gray-700">Your Name</label>
+                    <div class="mt-1">
+                        <input type="text" name="{{ form.name.html_name }}" id="{{ form.name.id_for_label }}" class="shadow-sm focus:ring-black focus:border-black block w-full sm:text-sm border-gray-300 rounded-md" required>
+                    </div>
+                    {% if form.name.errors %}
+                    <p class="mt-2 text-sm text-red-600">{{ form.name.errors }}</p>
+                    {% endif %}
+                </div>
+                
+                <!-- Rating Field -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Rating</label>
+                    <div class="mt-1 flex items-center space-x-4">
+                        {% for radio in form.rating %}
+                        <div class="flex items-center">
+                            {{ radio.tag }}
+                            <label for="{{ radio.id_for_label }}" class="ml-2 block text-sm text-gray-700">
+                                {{ radio.choice_label }}
+                            </label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% if form.rating.errors %}
+                    <p class="mt-2 text-sm text-red-600">{{ form.rating.errors }}</p>
+                    {% endif %}
+                </div>
+                
+                <!-- Content Field -->
+                <div>
+                    <label for="{{ form.content.id_for_label }}" class="block text-sm font-medium text-gray-700">Your Testimonial</label>
+                    <div class="mt-1">
+                        <textarea name="{{ form.content.html_name }}" id="{{ form.content.id_for_label }}" rows="4" class="shadow-sm focus:ring-black focus:border-black block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Share your experience with our products..."></textarea>
+                    </div>
+                    {% if form.content.errors %}
+                    <p class="mt-2 text-sm text-red-600">{{ form.content.errors }}</p>
+                    {% endif %}
+                </div>
+                
+                <!-- Photo Field -->
+                <div>
+                    <label for="{{ form.photo.id_for_label }}" class="block text-sm font-medium text-gray-700">Your Photo (Optional)</label>
+                    <div class="mt-1 flex items-center">
+                        <div class="flex-shrink-0 h-12 w-12 bg-gray-100 rounded-full overflow-hidden">
+                            <svg class="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                            </svg>
+                        </div>
+                        <input type="file" name="{{ form.photo.html_name }}" id="{{ form.photo.id_for_label }}" class="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black">
+                    </div>
+                    {% if form.photo.errors %}
+                    <p class="mt-2 text-sm text-red-600">{{ form.photo.errors }}</p>
+                    {% endif %}
+                </div>
+                
+                <!-- Submit Button -->
+                <div class="pt-4">
+                    <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-black hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black">
+                        Submit Testimonial
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

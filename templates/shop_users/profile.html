@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}My Profile - BLACK{% endblock %}
+
+{% block content %}
+<!-- Profile Header -->
+<section class="py-16 bg-black text-white">
+    <div class="container mx-auto px-4 text-center">
+        <h1 class="text-4xl font-bold mb-4">MY PROFILE</h1>
+        <p class="text-xl max-w-2xl mx-auto">Manage your account details.</p>
+    </div>
+</section>
+
+<!-- Profile Content -->
+<section class="py-16 bg-white">
+    <div class="container mx-auto px-4 max-w-4xl">
+        <div class="bg-white p-8 shadow-md rounded-lg" data-aos="fade-up">
+            <div class="flex flex-col md:flex-row">
+                <!-- Sidebar Navigation -->
+                <div class="w-full md:w-1/4 mb-8 md:mb-0">
+                    <div class="border-r pr-6">
+                        <h3 class="text-xl font-bold mb-6">Account</h3>
+                        <ul class="space-y-4">
+                            <li class="font-medium text-black">Profile</li>
+                            <li><a href="{% url 'shop_users:password_change' %}" class="text-gray-600 hover:text-black transition duration-300">Change Password</a></li>
+                            <li><a href="{% url 'shop_orders:order_history' %}" class="text-gray-600 hover:text-black transition duration-300">Order History</a></li>
+                            <li><a href="{% url 'shop_products:wishlist' %}" class="text-gray-600 hover:text-black transition duration-300">Wishlist</a></li>
+                            <li><a href="{% url 'shop_users:logout' %}" class="text-gray-600 hover:text-black transition duration-300">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Profile Details -->
+                <div class="w-full md:w-3/4 md:pl-8">
+                    <h3 class="text-xl font-bold mb-6">Profile Details</h3>
+                    <div class="mb-6">
+                        <p class="text-gray-700"><span class="font-medium">Username:</span> {{ user.username }}</p>
+                    </div>
+                    <div class="mb-6">
+                        <p class="text-gray-700"><span class="font-medium">Email:</span> {{ user.email|default:"Not provided" }}</p>
+                    </div>
+                    <div class="mb-6">
+                        <p class="text-gray-700"><span class="font-medium">Date Joined:</span> {{ user.date_joined|date:"F j, Y" }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

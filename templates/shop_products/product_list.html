@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Shop - BLACK{% endblock %}
+
+{% block content %}
+<!-- Products Header -->
+<section class="py-16 bg-black text-white">
+    <div class="container mx-auto px-4 text-center">
+        <h1 class="text-4xl font-bold mb-4">SHOP OUR COLLECTION</h1>
+        <p class="text-xl max-w-2xl mx-auto">Premium quality black t-shirts designed for comfort and style.</p>
+    </div>
+</section>
+
+<!-- Products Grid -->
+<section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for product in products %}
+            <div class="group hover:shadow-lg transition-shadow duration-300 p-4 product-card" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:'50' }}">
+                <div class="relative overflow-hidden mb-4">
+                    {% if product.main_image %}
+                    <img src="{{ product.main_image.url }}" alt="{{ product.name }}" class="w-full h-80 object-cover transition duration-500 transform">
+                    {% else %}
+                    <img src="{% static 'images/product-' %}{{ forloop.counter|stringformat:'d'|slice:':1' }}.svg" alt="{{ product.name }}" class="w-full h-80 object-cover transition duration-500 transform">
+                    {% endif %}
+                    <div class="absolute inset-0 bg-black bg-opacity-0 transition duration-300 flex items-center justify-center opacity-0 card-overlay">
+                        <a href="{% url 'shop_products:product_detail' product.id %}" class="bg-white text-black px-6 py-2 transform translate-y-4 transition duration-300 animated-btn">View Details</a>
+                    </div>
+                    
+                    <!-- Wishlist Button -->
+                    <div class="absolute top-2 right-2">
+                        {% if product.id in wishlist_items %}
+                        <form method="post" action="{% url 'shop_products:remove_from_wishlist' product.id %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="next" value="{% url 'shop_products:product_list' %}">
+                            <button type="submit" class="bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                </svg>
+                            </button>
+                        </form>
+                        {% else %}
+                        <form method="post" action="{% url 'shop_products:add_to_wishlist' product.id %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="next" value="{% url 'shop_products:product_list' %}">
+                            <button type="submit" class="bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                </svg>
+                            </button>
+                        </form>
+                        {% endif %}
+                    </div>
+                </div>
+                <h3 class="text-xl font-medium mb-2">{{ product.name }}</h3>
+                <p class="text-gray-700 font-bold mb-4">${{ product.price }}</p>
+                
+                <div class="flex justify-between">
+                    <a href="{% url 'shop_products:product_detail' product.id %}" class="text-black hover:underline">View Details</a>
+                    <form method="post" action="{% url 'shop_cart:add_to_cart' product.id %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="size" value="M">
+                        <input type="hidden" name="quantity" value="1">
+                        <button type="submit" class="text-black hover:underline">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-span-3 text-center py-12">
+                <p class="text-xl text-gray-600">No products available at the moment.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

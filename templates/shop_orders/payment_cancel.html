@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Payment Cancelled | Black T-shirt Designer{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-12">
+    <div class="max-w-2xl mx-auto text-center">
+        <div class="bg-red-50 p-8 rounded-lg shadow-md">
+            <svg class="h-16 w-16 text-red-500 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+            
+            <h1 class="text-3xl font-bold mb-4">Payment Cancelled</h1>
+            <p class="text-xl mb-6">Your payment was not completed and your order has been cancelled.</p>
+            
+            <p class="mb-8">If you experienced any issues during the payment process or have any questions, please don't hesitate to contact our customer support team.</p>
+            
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                <a href="{% url 'shop_cart:cart_detail' %}" class="bg-black text-white px-6 py-3 rounded-md hover:bg-gray-800 transition duration-300">Return to Cart</a>
+                <a href="{% url 'shop_products:product_list' %}" class="bg-gray-200 text-gray-800 px-6 py-3 rounded-md hover:bg-gray-300 transition duration-300">Continue Shopping</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

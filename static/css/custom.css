@@ -1,0 +1,322 @@
+/* Custom CSS for enhanced animations and payment interface */
+
+/* Global Animation Styles */
+body {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+body.loaded {
+    opacity: 1;
+}
+
+/* Enhanced Button Animations */
+button, .btn, a.bg-black, button[type="submit"] {
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+button::after, .btn::after, a.bg-black::after, button[type="submit"]::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+}
+
+button:focus, .btn:focus, a.bg-black:focus, button[type="submit"]:focus {
+    outline: none;
+}
+
+button:active::after, .btn:active::after, a.bg-black:active::after, button[type="submit"]:active::after {
+    animation: ripple 1s ease-out;
+}
+
+/* Ripple Animation */
+@keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+    }
+    20% {
+        transform: scale(25, 25);
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 0;
+        transform: scale(40, 40);
+    }
+}
+
+/* Enhanced Form Styles */
+input, select, textarea {
+    transition: all 0.3s ease;
+    border: 2px solid #e2e8f0;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #000;
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Valid/Invalid Form Feedback */
+input:valid:not(:placeholder-shown) {
+    border-color: #68d391;
+}
+
+input:invalid:not(:placeholder-shown) {
+    border-color: #fc8181;
+}
+
+/* Payment Form Specific Styles */
+.payment-form label {
+    transition: all 0.3s ease;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.payment-form input:focus + label,
+.payment-form input:not(:placeholder-shown) + label {
+    transform: translateY(-1.5rem);
+    font-size: 0.875rem;
+    color: #000;
+}
+
+/* Card Animation */
+.product-card {
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    overflow: hidden;
+}
+
+.product-card:hover, .hover-float:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Enhanced animated button */
+.animated-btn {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.animated-btn:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.1);
+    z-index: -2;
+}
+
+.animated-btn:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+    transition: all .3s;
+    z-index: -1;
+}
+
+.animated-btn:hover:before {
+    width: 100%;
+}
+
+.product-card img {
+    transition: transform 0.5s ease;
+}
+
+.product-card:hover img {
+    transform: scale(1.1);
+}
+
+.card-overlay {
+    transition: opacity 0.3s ease, background-color 0.3s ease;
+}
+
+/* Slick Slider Enhanced Styles */
+.slick-slide {
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    opacity: 0.5;
+    transform: scale(0.85);
+}
+
+.slick-center {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.slick-dots li button:before {
+    font-size: 12px;
+    transition: all 0.3s ease;
+}
+
+.slick-dots li.slick-active button:before {
+    transform: scale(1.5);
+}
+
+/* Page Transitions */
+.page-transition-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+/* Checkout Form Enhancements */
+.checkout-form input,
+.checkout-form select {
+    height: 3rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    transition: all 0.3s ease;
+}
+
+.checkout-form input:focus,
+.checkout-form select:focus {
+    transform: translateY(-2px);
+}
+
+.checkout-form button[type="submit"] {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.checkout-form button[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Order Summary Animation */
+.order-summary {
+    transition: all 0.3s ease;
+}
+
+.order-summary:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Loading Animation for Payment Processing */
+.payment-processing {
+    position: relative;
+}
+
+.payment-processing::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.payment-processing::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #000;
+    animation: spin 1s linear infinite;
+    z-index: 11;
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Success Animation */
+.success-checkmark {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.success-checkmark .check-icon {
+    width: 80px;
+    height: 80px;
+    position: relative;
+    border-radius: 50%;
+    box-sizing: content-box;
+    border: 4px solid #4CAF50;
+}
+
+.success-checkmark .check-icon::before {
+    top: 3px;
+    left: -2px;
+    transform: rotate(45deg);
+    transform-origin: 100% 50%;
+    animation: checkmark-top 0.4s ease;
+}
+
+.success-checkmark .check-icon::after {
+    top: 0;
+    left: 30px;
+    transform: rotate(-45deg);
+    transform-origin: 0% 50%;
+    animation: checkmark-bottom 0.4s ease forwards;
+    animation-delay: 0.2s;
+}
+
+.success-checkmark .check-icon::before,
+.success-checkmark .check-icon::after {
+    content: '';
+    height: 4px;
+    background-color: #4CAF50;
+    position: absolute;
+    display: block;
+    z-index: 10;
+}
+
+@keyframes checkmark-top {
+    0% {
+        width: 0;
+        opacity: 1;
+    }
+    100% {
+        width: 30px;
+        opacity: 1;
+    }
+}
+
+@keyframes checkmark-bottom {
+    0% {
+        width: 0;
+        opacity: 1;
+    }
+    100% {
+        width: 50px;
+        opacity: 1;
+    }
+}

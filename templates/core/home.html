@@ -1,0 +1,306 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}BLACK - Premium T-shirts{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="relative h-screen flex items-center justify-center bg-black text-white overflow-hidden">
+    <div class="absolute inset-0 z-0">
+        <img src="{% static 'images/hero-bg-new.svg' %}" alt="Black T-shirt" class="w-full h-full object-cover opacity-70 parallax-bg">
+    </div>
+    <div class="container mx-auto px-4 z-10 text-center" data-aos="fade-up">
+        <span class="inline-block text-sm uppercase tracking-widest mb-2 text-gray-300">Crafted with precision</span>
+        <h1 class="text-4xl md:text-6xl font-bold mb-6 hero-text">MINIMALIST ELEGANCE</h1>
+        <p class="text-xl md:text-2xl mb-8 max-w-2xl mx-auto hero-text">Premium black T-shirts with customized designs that speak your unique style.</p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4 hero-text">
+            <a href="{% url 'shop_products:product_list' %}" class="bg-white text-black px-8 py-3 rounded-none hover:bg-gray-200 transition duration-300 text-lg font-medium animated-btn">Shop Now</a>
+        </div>
+        <div class="mt-12 flex justify-center items-center space-x-8">
+            <div class="flex flex-col items-center">
+                <span class="text-3xl font-bold">100%</span>
+                <span class="text-sm uppercase tracking-wider">Organic Cotton</span>
+            </div>
+            <div class="h-12 w-px bg-gray-500"></div>
+            <div class="flex flex-col items-center">
+                <span class="text-3xl font-bold">5★</span>
+                <span class="text-sm uppercase tracking-wider">Customer Rating</span>
+            </div>
+            <div class="h-12 w-px bg-gray-500"></div>
+            <div class="flex flex-col items-center">
+                <span class="text-3xl font-bold">1Y</span>
+                <span class="text-sm uppercase tracking-wider">Warranty</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Products -->
+<section class="py-20 bg-white">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold mb-12 text-center" data-aos="fade-up">FEATURED DESIGNS</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for product in featured_products %}
+            <div class="group product-card hover-float" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:'100' }}">
+                <div class="relative overflow-hidden mb-4">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-full h-80 object-cover transition duration-500 transform group-hover:scale-105">
+                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100 card-overlay">
+                        <a href="{{ product.get_absolute_url }}" class="bg-white text-black px-6 py-2 transform translate-y-4 group-hover:translate-y-0 transition duration-300 animated-btn">View Details</a>
+                    </div>
+                </div>
+                <h3 class="text-xl font-medium transition-all duration-300 group-hover:text-black">{{ product.name }}</h3>
+                <p class="text-gray-700 transition-all duration-300 group-hover:font-bold">${{ product.price }}</p>
+                <div class="h-0.5 w-0 bg-black transition-all duration-500 group-hover:w-full mt-2"></div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-12" data-aos="fade-up">
+            <a href="{% url 'shop_products:product_list' %}" class="inline-block bg-black text-white px-8 py-3 hover:bg-gray-800 transition duration-300">View All Designs</a>
+        </div>
+    </div>
+</section>
+
+<!-- Collections Section -->
+<section class="py-20 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-16" data-aos="fade-up">
+            <span class="inline-block text-sm uppercase tracking-widest mb-2 text-gray-500">Curated for you</span>
+            <h2 class="text-3xl font-bold">OUR COLLECTIONS</h2>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto mt-4">Explore our carefully curated collections designed for different occasions and styles.</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            <!-- Essential Collection -->
+            <div class="group relative overflow-hidden rounded-lg shadow-md hover-float" data-aos="fade-up">
+                <div class="aspect-w-3 aspect-h-4">
+                    <img src="{% static 'images/collection-essential.jpg' %}" alt="Essential Collection" class="w-full h-full object-cover transition duration-500 transform group-hover:scale-105">
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+                <div class="absolute bottom-0 left-0 p-6 text-white">
+                    <h3 class="text-2xl font-bold mb-2 transform transition-transform duration-300 group-hover:translate-x-2">Essentials</h3>
+                    <p class="mb-4 opacity-90 transform transition-all duration-300 group-hover:translate-x-2">Timeless black tees for everyday wear</p>
+                    <a href="{% url 'shop_products:product_list' %}?category=essentials" class="inline-block bg-white text-black px-6 py-2 rounded-none hover:bg-gray-200 transition duration-300 text-sm font-medium animated-btn">Shop Now</a>
+                </div>
+            </div>
+            
+            <!-- Premium Collection -->
+            <div class="group relative overflow-hidden rounded-lg shadow-md hover-float" data-aos="fade-up" data-aos-delay="100">
+                <div class="aspect-w-3 aspect-h-4">
+                    <img src="{% static 'images/collection-premium.jpg' %}" alt="Premium Collection" class="w-full h-full object-cover transition duration-500 transform group-hover:scale-105">
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+                <div class="absolute bottom-0 left-0 p-6 text-white">
+                    <h3 class="text-2xl font-bold mb-2 transform transition-transform duration-300 group-hover:translate-x-2">Premium</h3>
+                    <p class="mb-4 opacity-90 transform transition-all duration-300 group-hover:translate-x-2">Luxury fabrics with exceptional comfort</p>
+                    <a href="{% url 'shop_products:product_list' %}?category=premium" class="inline-block bg-white text-black px-6 py-2 rounded-none hover:bg-gray-200 transition duration-300 text-sm font-medium animated-btn">Shop Now</a>
+                </div>
+            </div>
+            
+            <!-- Limited Edition Collection -->
+            <div class="group relative overflow-hidden rounded-lg shadow-md hover-float" data-aos="fade-up" data-aos-delay="200">
+                <div class="aspect-w-3 aspect-h-4">
+                    <img src="{% static 'images/collection-limited.jpg' %}" alt="Limited Edition Collection" class="w-full h-full object-cover transition duration-500 transform group-hover:scale-105">
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+                <div class="absolute bottom-0 left-0 p-6 text-white">
+                    <h3 class="text-2xl font-bold mb-2 transform transition-transform duration-300 group-hover:translate-x-2">Limited Edition</h3>
+                    <p class="mb-4 opacity-90 transform transition-all duration-300 group-hover:translate-x-2">Exclusive designs with unique details</p>
+                    <a href="{% url 'shop_products:product_list' %}?category=limited" class="inline-block bg-white text-black px-6 py-2 rounded-none hover:bg-gray-200 transition duration-300 text-sm font-medium animated-btn">Shop Now</a>
+                </div>
+            </div>
+            
+            <!-- Streetwear Collection -->
+            <div class="group relative overflow-hidden rounded-lg shadow-md hover-float" data-aos="fade-up" data-aos-delay="300">
+                <div class="aspect-w-3 aspect-h-4">
+                    <img src="{% static 'images/collection-streetwear.svg' %}" alt="Streetwear Collection" class="w-full h-full object-cover transition duration-500 transform group-hover:scale-105">
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+                <div class="absolute bottom-0 left-0 p-6 text-white">
+                    <h3 class="text-2xl font-bold mb-2 transform transition-transform duration-300 group-hover:translate-x-2">Streetwear</h3>
+                    <p class="mb-4 opacity-90 transform transition-all duration-300 group-hover:translate-x-2">Urban style for the modern trendsetter</p>
+                    <a href="{% url 'shop_products:product_list' %}?category=streetwear" class="inline-block bg-white text-black px-6 py-2 rounded-none hover:bg-gray-200 transition duration-300 text-sm font-medium animated-btn">Shop Now</a>
+                </div>
+            </div>
+            
+            <!-- Vintage Collection -->
+            <div class="group relative overflow-hidden rounded-lg shadow-md hover-float" data-aos="fade-up" data-aos-delay="400">
+                <div class="aspect-w-3 aspect-h-4">
+                    <img src="{% static 'images/collection-vintage.svg' %}" alt="Vintage Collection" class="w-full h-full object-cover transition duration-500 transform group-hover:scale-105">
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+                <div class="absolute bottom-0 left-0 p-6 text-white">
+                    <h3 class="text-2xl font-bold mb-2 transform transition-transform duration-300 group-hover:translate-x-2">Vintage</h3>
+                    <p class="mb-4 opacity-90 transform transition-all duration-300 group-hover:translate-x-2">Retro-inspired designs with a modern twist</p>
+                    <a href="{% url 'shop_products:product_list' %}?category=vintage" class="inline-block bg-white text-black px-6 py-2 rounded-none hover:bg-gray-200 transition duration-300 text-sm font-medium animated-btn">Shop Now</a>
+                </div>
+            </div>
+            
+            <!-- Minimalist Collection -->
+            <!-- <div class="group relative overflow-hidden rounded-lg shadow-md hover-float" data-aos="fade-up" data-aos-delay="500">
+                <div class="aspect-w-3 aspect-h-4">
+                    <img src="{% static 'images/collection-minimalist.svg' %}" alt="Minimalist Collection" class="w-full h-full object-cover transition duration-500 transform group-hover:scale-105">
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+                <div class="absolute bottom-0 left-0 p-6 text-white">
+                    <h3 class="text-2xl font-bold mb-2 transform transition-transform duration-300 group-hover:translate-x-2">Minimalist</h3>
+                    <p class="mb-4 opacity-90 transform transition-all duration-300 group-hover:translate-x-2">Clean, simple designs for the modern minimalist</p>
+                    <a href="{% url 'shop_products:product_list' %}?category=minimalist" class="inline-block bg-white text-black px-6 py-2 rounded-none hover:bg-gray-200 transition duration-300 text-sm font-medium animated-btn">Shop Now</a>
+                </div>
+            </div>-->
+            
+            <!-- Athleisure Collection -->
+            <div class="group relative overflow-hidden rounded-lg shadow-md hover-float" data-aos="fade-up" data-aos-delay="600">
+                <div class="aspect-w-3 aspect-h-4">
+                    <img src="{% static 'images/collection-athleisure.svg' %}" alt="Athleisure Collection" class="w-full h-full object-cover transition duration-500 transform group-hover:scale-105">
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+                <div class="absolute bottom-0 left-0 p-6 text-white">
+                    <h3 class="text-2xl font-bold mb-2 transform transition-transform duration-300 group-hover:translate-x-2">Athleisure</h3>
+                    <p class="mb-4 opacity-90 transform transition-all duration-300 group-hover:translate-x-2">Performance meets style for active lifestyles</p>
+                    <a href="{% url 'shop_products:product_list' %}?category=athleisure" class="inline-block bg-white text-black px-6 py-2 rounded-none hover:bg-gray-200 transition duration-300 text-sm font-medium animated-btn">Shop Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Products Section -->
+<section class="py-20 bg-gray-100">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0" data-aos="fade-right">
+                <img src="{% static 'images/featured-products.jpg' %}" alt="Featured Products" class="w-full h-auto">
+            </div>
+            <div class="md:w-1/2 md:pl-12" data-aos="fade-left">
+                <h2 class="text-3xl font-bold mb-6">EXPLORE OUR COLLECTION</h2>
+                <p class="text-lg text-gray-700 mb-8">Discover our premium selection of black t-shirts designed for style and comfort.</p>
+                <a href="{% url 'shop_products:product_list' %}" class="inline-block bg-black text-white px-8 py-3 hover:bg-gray-800 transition duration-300">Shop Now</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials -->
+<section class="py-20 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-16" data-aos="fade-up">
+            <span class="inline-block text-sm uppercase tracking-widest mb-2 text-gray-500">Real experiences</span>
+            <h2 class="text-3xl font-bold">THE BLACK COMMUNITY</h2>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto mt-4">Join thousands who have discovered the perfect black t-shirt that becomes part of their story.</p>
+        </div>
+        
+        <div class="testimonial-slider max-w-6xl mx-auto">
+            {% for testimonial in testimonials %}
+            <div class="px-4" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:'100' }}">
+                <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100">
+                    <div class="mb-6">
+                        <svg class="h-8 w-8 text-gray-400 mb-4" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                        </svg>
+                        <p class="text-gray-700 text-lg italic mb-6">{{ testimonial.content }}</p>
+                    </div>
+                    <div class="flex items-center">
+                        {% if testimonial.photo %}
+                        <img src="{{ testimonial.photo.url }}" alt="{{ testimonial.name }}" class="w-12 h-12 rounded-full object-cover mr-4 border-2 border-gray-200">
+                        {% else %}
+                        <div class="w-12 h-12 rounded-full bg-black text-white mr-4 flex items-center justify-center">
+                            <span class="font-bold">{{ testimonial.name|first }}</span>
+                        </div>
+                        {% endif %}
+                        <div>
+                            <h4 class="font-bold">{{ testimonial.name }}</h4>
+                            <div class="flex text-yellow-400">
+                                {% for i in "12345" %}
+                                {% if forloop.counter <= testimonial.rating %}
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                                {% else %}
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-300" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="text-center mt-12">
+            <a href="{% url 'shop_products:product_list' %}" class="inline-block bg-black text-white px-8 py-3 hover:bg-gray-800 transition duration-300">Join the Community</a>
+        </div>
+    </div>
+</section>
+
+<!-- Newsletter -->
+<section class="py-20 bg-black text-white relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10">
+        <img src="{% static 'images/texture-bg.svg' %}" alt="Texture" class="w-full h-full object-cover">
+    </div>
+    <div class="container mx-auto px-4 text-center relative z-10" data-aos="fade-up">
+        <span class="inline-block text-sm uppercase tracking-widest mb-2 text-gray-400 hero-text">Stay connected</span>
+        <h2 class="text-3xl font-bold mb-6 hero-text">BE PART OF OUR JOURNEY</h2>
+        <p class="text-lg mb-8 max-w-2xl mx-auto hero-text">Join our community of minimalist style enthusiasts. Subscribe for exclusive offers, early access to limited editions, and stories that inspire.</p>
+        
+        <div class="flex flex-col md:flex-row items-center justify-center gap-8 mb-12">
+            <div class="flex items-center hover-float" data-aos="fade-up" data-aos-delay="100">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-gray-400 transition-all duration-300 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+                <span class="transition-all duration-300 hover:text-white">Secure checkout</span>
+            </div>
+            <div class="flex items-center hover-float" data-aos="fade-up" data-aos-delay="200">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-gray-400 transition-all duration-300 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+                </svg>
+                <span class="transition-all duration-300 hover:text-white">Free shipping on orders over $75</span>
+            </div>
+            <div class="flex items-center hover-float" data-aos="fade-up" data-aos-delay="300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-gray-400 transition-all duration-300 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                </svg>
+                <span class="transition-all duration-300 hover:text-white">30-day returns</span>
+            </div>
+        </div>
+        
+        <form class="max-w-md mx-auto flex flex-col sm:flex-row gap-2 newsletter-form" action="{% url 'core:newsletter_signup' %}" method="post" data-aos="zoom-in">
+            {% csrf_token %}
+            <input type="email" name="email" placeholder="Your email address" required class="px-4 py-3 w-full text-black focus:outline-none transition-all duration-300 focus:shadow-lg">
+            <button type="submit" class="bg-white text-black px-6 py-3 hover:bg-gray-200 transition duration-300 sm:whitespace-nowrap animated-btn transform hover:scale-105">Subscribe</button>
+        </form>
+        <p class="text-sm text-gray-400 mt-4 transition-all duration-300 hover:text-white">By subscribing, you agree to receive marketing communications from us.</p>
+    </div>
+</section>
+
+<!-- Instagram Feed -->
+<section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold mb-12 text-center" data-aos="fade-up">FOLLOW OUR STYLE</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2">
+            {% for i in "123456" %}
+            <div class="overflow-hidden group product-card hover-float" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:'50' }}" data-aos-anchor-placement="top-bottom">
+                <a href="https://instagram.com/blacktshirts" target="_blank" class="block relative">
+                    <img src="{% static 'images/instagram-'|add:i|add:'.jpg' %}" alt="Instagram post" class="w-full h-full object-cover transition duration-500 transform group-hover:scale-110 group-hover:rotate-1">
+                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100 card-overlay">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white transition duration-300 transform scale-0 group-hover:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                        </svg>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-8" data-aos="fade-up">
+            <a href="https://instagram.com/blacktshirts" target="_blank" class="inline-flex items-center text-black hover:underline animated-btn px-4 py-2">
+                <span class="mr-2">@blacktshirts</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}
