@@ -1,0 +1,201 @@
+/* Additional responsive styles for the home page */
+
+/* Small devices (phones) */
+@media (max-width: 640px) {
+  .hero-text {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .product-card {
+    margin-bottom: 2rem;
+  }
+  
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  /* Fix for collections section on mobile */
+  .grid {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+  
+  /* Improve hero section on small screens */
+  h1.hero-text {
+    font-size: 2.25rem;
+    line-height: 1.2;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  /* Better spacing for stats in hero section */
+  .mt-12 {
+    margin-top: 2rem;
+  }
+  
+  /* Ensure testimonials display properly */
+  .testimonial-slider .px-2 {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  
+  /* Improve image display on small screens */
+  .w-full.h-full.object-cover {
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  /* Fix hero section height on small screens */
+  .h-screen {
+    height: 90vh;
+    min-height: 500px;
+  }
+}
+
+/* Medium devices (tablets) */
+@media (min-width: 641px) and (max-width: 768px) {
+  .hero-text {
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .product-card img {
+    height: 250px;
+  }
+  
+  /* Improve collections grid on tablets */
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+  
+  /* Better testimonial display */
+  .testimonial-slider {
+    padding: 0 1rem;
+  }
+  
+  /* Improve featured products section */
+  .flex-col-mobile {
+    flex-direction: column;
+  }
+  
+  /* Fix collection images on tablets */
+  .aspect-w-3.aspect-h-4 img {
+    height: 100%;
+    object-position: center;
+  }
+  
+  /* Improve container width on tablets */
+  .container {
+    width: 95%;
+    max-width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* Large devices (desktops) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .container {
+    max-width: 90%;
+  }
+}
+
+/* Extra large devices */
+@media (min-width: 1025px) {
+  .container {
+    max-width: 1200px;
+  }
+}
+
+/* Ensure buttons are properly sized on mobile */
+@media (max-width: 640px) {
+  .animated-btn {
+    width: 100%;
+    margin-bottom: 0.5rem;
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+  }
+  
+  .flex-col-mobile {
+    flex-direction: column;
+  }
+  
+  .w-full-mobile {
+    width: 100%;
+  }
+  
+  /* Fix spacing in collection cards */
+  .p-4, .p-6 {
+    padding: 1rem;
+  }
+  
+  /* Improve text sizing on mobile */
+  .text-3xl {
+    font-size: 1.75rem;
+  }
+  
+  .text-xl {
+    font-size: 1.25rem;
+  }
+
+  /* Fix testimonials section on mobile */
+  .testimonial-slider {
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+  }
+  
+  /* Improve featured products section on mobile */
+  .py-20 .flex-col {
+    gap: 2rem;
+  }
+  
+  /* Better spacing for collection cards */
+  .aspect-w-3 {
+    margin-bottom: 1rem;
+  }
+}
+
+/* Extra small devices (small phones) */
+@media (max-width: 480px) {
+  h1.hero-text {
+    font-size: 1.85rem;
+  }
+  
+  .text-base {
+    font-size: 0.9rem;
+  }
+  
+  .container {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+  
+  /* Improve spacing in sections */
+  .py-20 {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+  
+  .py-16 {
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+  
+  /* Fix collection card display */
+  .aspect-w-3.aspect-h-4 {
+    height: 250px;
+  }
+}
+
+/* Improve form responsiveness */
+@media (max-width: 768px) {
+  form input, form select, form textarea {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+}

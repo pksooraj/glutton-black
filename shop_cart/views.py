@@ -19,9 +19,10 @@ def cart_detail(request):
         cart_items = CartItem.objects.filter(session_id=session_id)
     
     # Calculate totals
+    from decimal import Decimal
     subtotal = sum(item.total_price for item in cart_items)
-    tax = subtotal * 0.08  # 8% tax rate
-    total = subtotal + tax + 5.00  # $5 shipping
+    tax = subtotal * Decimal('0.08')  # 8% tax rate
+    total = subtotal + tax + Decimal('5.00')  # $5 shipping
     
     return render(request, 'shop_cart/cart_detail.html', {
         'cart_items': cart_items,

@@ -30,8 +30,10 @@
                 {% for item in cart_items %}
                 <div class="flex flex-col md:flex-row border-b border-gray-200 py-6 hover:bg-gray-50 transition duration-300 product-card" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:'100' }}" data-item-id="{{ item.id }}" style="transition: all 0.3s ease;">
                     <div class="md:w-1/4 mb-4 md:mb-0">
-                        {% if item.product.image %}
-                        <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="w-full h-auto object-cover rounded shadow-sm">
+                        {% if item.product.images.exists %}
+                        {% with main_image=item.product.images.first %}
+                        <img src="{{ main_image.image.url }}" alt="{{ item.product.name }}" class="w-full h-auto object-cover rounded shadow-sm">
+                        {% endwith %}
                         {% else %}
                         <img src="{% static 'images/cart-placeholder.svg' %}" alt="{{ item.product.name }}" class="w-full h-auto object-cover rounded shadow-sm">
                         {% endif %}
@@ -49,7 +51,7 @@
                                 <button type="button" class="w-8 h-8 border border-gray-300 flex items-center justify-center animated-btn increase-btn">+</button>
                             </form>
                             <div class="flex items-center justify-between">
-                                <p class="text-xl font-medium">${{ item.total_price }}</p>
+                                <p class="text-xl font-medium">₹{{ item.total_price }}</p>
                                 <form method="post" action="{% url 'shop_cart:remove_from_cart' item.id %}" class="inline">
                                     {% csrf_token %}
                                     <button type="submit" class="ml-6 text-gray-500 hover:text-black transition duration-300 animated-btn remove-btn">
@@ -73,21 +75,21 @@
                     <div class="border-b border-gray-200 pb-4 mb-4">
                         <div class="flex justify-between mb-2">
                             <span>Subtotal</span>
-                            <span>${{ subtotal }}</span>
+                            <span>₹{{ subtotal }}</span>
                         </div>
                         <div class="flex justify-between mb-2">
                             <span>Shipping</span>
-                            <span>$5.00</span>
+                            <span>₹350.00</span>
                         </div>
                         <div class="flex justify-between">
                             <span>Tax</span>
-                            <span>${{ tax }}</span>
+                            <span>₹{{ tax }}</span>
                         </div>
                     </div>
                     
                     <div class="flex justify-between mb-6">
                         <span class="font-bold">Total</span>
-                        <span class="font-bold">${{ total }}</span>
+                        <span class="font-bold">₹{{ total }}</span>
                     </div>
                     
                     <a href="{% url 'shop_orders:checkout' %}" class="w-full bg-black text-white py-3 hover:bg-gray-800 transition duration-300 mb-4 animated-btn checkout-btn block text-center" style="transition: all 0.3s ease;">Proceed to Checkout</a>

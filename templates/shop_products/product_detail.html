@@ -3,6 +3,28 @@
 
 {% block extra_js %}
 <script src="{% static 'js/product.js' %}"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Image gallery functionality
+    const mainImage = document.querySelector('.product-main-image');
+    const galleryImages = document.querySelectorAll('.gallery-image');
+    
+    if (mainImage && galleryImages.length > 0) {
+      galleryImages.forEach(img => {
+        img.addEventListener('click', function() {
+          // Update main image src with clicked thumbnail src
+          mainImage.src = this.src;
+          
+          // Remove active class from all thumbnails
+          galleryImages.forEach(thumb => thumb.parentElement.classList.remove('ring-2', 'ring-black'));
+          
+          // Add active class to clicked thumbnail
+          this.parentElement.classList.add('ring-2', 'ring-black');
+        });
+      });
+    }
+  });
+</script>
 {% endblock %}
 
 {% block title %}{{ product.name }} - BLACK{% endblock %}
@@ -15,8 +37,21 @@
             <!-- Product Image -->
             <div class="md:w-1/2 px-4 mb-8 md:mb-0" data-aos="fade-right">
                 <div class="sticky top-24">
-                    {% if product.image %}
-                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-full h-auto object-cover shadow-lg rounded">
+                    {% if product.images.exists %}
+                    {% with main_image=product.images.first %}
+                    <img src="{{ main_image.image.url }}" alt="{{ product.name }}" class="w-full h-auto object-cover shadow-lg rounded product-main-image">
+                    {% endwith %}
+                    
+                    <!-- Image Gallery -->
+                    {% if product.images.count > 1 %}
+                    <div class="mt-4 grid grid-cols-4 gap-2">
+                        {% for image in product.images.all %}
+                        <div class="cursor-pointer hover:opacity-75 transition duration-300 {% if forloop.first %}ring-2 ring-black{% endif %} rounded">
+                            <img src="{{ image.image.url }}" alt="{{ product.name }}" class="w-full h-auto object-cover rounded gallery-image">
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
                     {% else %}
                     <img src="{% static 'images/product-1.jpg' %}" alt="{{ product.name }}" class="w-full h-auto object-cover shadow-lg rounded">
                     {% endif %}
@@ -26,7 +61,7 @@
             <!-- Product Info -->
             <div class="md:w-1/2 px-4" data-aos="fade-left">
                 <h1 class="text-3xl font-bold mb-4 hero-text">{{ product.name }}</h1>
-                <p class="text-2xl font-medium mb-6 hero-text">${{ product.price }}</p>
+                <p class="text-2xl font-medium mb-6 hero-text">₹{{ product.price }}</p>
                 
                 <div class="mb-8" data-aos="fade-up" data-aos-delay="100">
                     <h2 class="text-lg font-medium mb-2">Description</h2>

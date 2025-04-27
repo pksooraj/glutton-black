@@ -18,7 +18,7 @@
                     <h3 class="font-semibold mb-2">Order Details</h3>
                     <p class="mb-1"><strong>Order Date:</strong> {{ order.created_at|date:"F j, Y" }}</p>
                     <p class="mb-1"><strong>Order Status:</strong> {{ order.get_status_display }}</p>
-                    <p><strong>Order Total:</strong> ${{ order.total_cost }}</p>
+                    <p><strong>Order Total:</strong> ₹{{ order.total_cost }}</p>
                 </div>
                 
                 <div>
@@ -60,23 +60,23 @@
                             </td>
                             <td class="px-4 py-4">{{ item.size }}</td>
                             <td class="px-4 py-4 text-center">{{ item.quantity }}</td>
-                            <td class="px-4 py-4 text-right">${{ item.price }}</td>
-                            <td class="px-4 py-4 text-right">${{ item.total_price }}</td>
+                            <td class="px-4 py-4 text-right">₹{{ item.price }}</td>
+                            <td class="px-4 py-4 text-right">₹{{ item.total_price }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
                     <tfoot>
                         <tr>
                             <td colspan="4" class="px-4 py-4 text-right font-semibold">Subtotal:</td>
-                            <td class="px-4 py-4 text-right">${{ order.total_cost }}</td>
+                            <td class="px-4 py-4 text-right">₹{{ order.total_cost }}</td>
                         </tr>
                         <tr>
                             <td colspan="4" class="px-4 py-4 text-right font-semibold">Shipping:</td>
-                            <td class="px-4 py-4 text-right">$5.00</td>
+                            <td class="px-4 py-4 text-right">₹350.00</td>
                         </tr>
                         <tr>
                             <td colspan="4" class="px-4 py-4 text-right font-semibold">Total:</td>
-                            <td class="px-4 py-4 text-right font-bold">${{ order.total_cost|add:"5.00" }}</td>
+                            <td class="px-4 py-4 text-right font-bold">₹{{ order.total_cost|add:"350.00" }}</td>
                         </tr>
                     </tfoot>
                 </table>

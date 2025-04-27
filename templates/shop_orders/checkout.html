@@ -28,7 +28,7 @@
                                 <p class="font-medium">{{ item.product.name }}</p>
                                 <p class="text-sm text-gray-600">Size: {{ item.size }} | Qty: {{ item.quantity }}</p>
                             </div>
-                            <p>${{ item.total_price }}</p>
+                            <p>₹{{ item.total_price }}</p>
                         </div>
                         {% endfor %}
                     </div>
@@ -36,19 +36,19 @@
                     <div class="border-t border-gray-300 pt-4">
                         <div class="flex justify-between mb-2">
                             <p>Subtotal</p>
-                            <p>${{ cart.get_subtotal }}</p>
+                            <p>₹{{ cart.get_subtotal }}</p>
                         </div>
                         <div class="flex justify-between mb-2">
                             <p>Tax (8%)</p>
-                            <p>${{ cart.get_tax }}</p>
+                            <p>₹{{ cart.get_tax }}</p>
                         </div>
                         <div class="flex justify-between mb-2">
                             <p>Shipping</p>
-                            <p>$5.00</p>
+                            <p>₹350.00</p>
                         </div>
                         <div class="flex justify-between font-bold mt-4 pt-4 border-t border-gray-300">
                             <p>Total</p>
-                            <p>${{ cart.get_total }}</p>
+                            <p>₹{{ cart.get_total }}</p>
                         </div>
                     </div>
                 </div>
