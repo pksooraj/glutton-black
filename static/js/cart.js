@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const itemId = item.dataset.itemId;
         
         // Store original price per item
-        const originalPrice = parseFloat(priceElement.textContent.replace('$', '')) / parseInt(quantityInput.value);
+        const originalPrice = parseFloat(priceElement.textContent.replace('₹', '')) / parseInt(quantityInput.value);
         
         // Add hover effect to cart item
         item.addEventListener('mouseenter', function() {
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
         function updatePrice() {
             const quantity = parseInt(quantityInput.value);
             const newPrice = (originalPrice * quantity).toFixed(2);
-            priceElement.textContent = `$${newPrice}`;
+            priceElement.textContent = `₹${newPrice}`;
             
             // Update order summary
             updateOrderSummary();
@@ -114,20 +114,20 @@ document.addEventListener('DOMContentLoaded', function() {
     // Update order summary totals - only for visual feedback before form submission
     function updateOrderSummary() {
         const prices = Array.from(document.querySelectorAll('.product-card .text-xl.font-medium'))
-            .map(el => parseFloat(el.textContent.replace('$', '')));
+            .map(el => parseFloat(el.textContent.replace('₹', '')));
         
         const subtotal = prices.reduce((sum, price) => sum + price, 0);
         const tax = subtotal * 0.08; // Assuming 8% tax rate
-        const total = subtotal + tax + 5.00; // Adding $5 shipping
+        const total = subtotal + tax + 350.00; // Adding ₹350 shipping
         
         // Make sure these elements exist before trying to update them
         const subtotalElement = document.querySelector('.order-summary .border-b .flex:first-child span:last-child');
         const taxElement = document.querySelector('.order-summary .border-b .flex:last-child span:last-child');
         const totalElement = document.querySelector('.order-summary .flex.justify-between.mb-6 span:last-child');
         
-        if (subtotalElement) subtotalElement.textContent = `$${subtotal.toFixed(2)}`;
-        if (taxElement) taxElement.textContent = `$${tax.toFixed(2)}`;
-        if (totalElement) totalElement.textContent = `$${total.toFixed(2)}`;
+        if (subtotalElement) subtotalElement.textContent = `₹${subtotal.toFixed(2)}`;
+        if (taxElement) taxElement.textContent = `₹${tax.toFixed(2)}`;
+        if (totalElement) totalElement.textContent = `₹${total.toFixed(2)}`;
     }
     
     // Update cart count in header

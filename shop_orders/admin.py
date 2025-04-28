@@ -9,7 +9,7 @@ class OrderItemInline(admin.TabularInline):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['id', 'customer_name', 'email', 'status', 'total_items', 'created_at', 'actions_display']
+    list_display = ['id', 'customer_name', 'email', 'status_display', 'total_items', 'created_at', 'actions_display']
     list_filter = ['status', 'created_at', 'updated_at']
     search_fields = ['first_name', 'last_name', 'email', 'id']
     inlines = [OrderItemInline]
@@ -52,12 +52,28 @@ class OrderAdmin(admin.ModelAdmin):
         return format_html(html)
     order_summary.short_description = 'Order Summary'
     
+    def status_display(self, obj):
+        status_classes = {
+            'pending': 'status-pending',
+            'processing': 'status-processing',
+            'shipped': 'status-shipped',
+            'delivered': 'status-delivered',
+            'cancelled': 'status-cancelled'
+        }
+        status_class = status_classes.get(obj.status, '')
+        return format_html('<span class="order-status {}">{}</span>', status_class, obj.get_status_display())
+    status_display.short_description = 'Status'
+    
     def actions_display(self, obj):
+        actions = ''
         if obj.status == 'pending':
-            return format_html('<a class="button" href="#">Process</a>')
+            actions += format_html('<a class="button" style="background-color: #3B82F6; color: white; margin-right: 5px;" href="#">Process</a>')
         elif obj.status == 'processing':
-            return format_html('<a class="button" href="#">Ship</a>')
-        return ""
+            actions += format_html('<a class="button" style="background-color: #10B981; color: white; margin-right: 5px;" href="#">Ship</a>')
+        elif obj.status == 'shipped':
+            actions += format_html('<a class="button" style="background-color: #059669; color: white; margin-right: 5px;" href="#">Deliver</a>')
+        
+        return actions
     actions_display.short_description = 'Quick Actions'
     
     def mark_as_processing(self, request, queryset):

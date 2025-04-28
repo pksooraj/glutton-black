@@ -71,12 +71,16 @@
                             <td class="px-4 py-4 text-right">₹{{ order.total_cost }}</td>
                         </tr>
                         <tr>
+                            <td colspan="4" class="px-4 py-4 text-right font-semibold">Tax (Included in MRP):</td>
+                            <td class="px-4 py-4 text-right">₹0.00</td>
+                        </tr>
+                        <tr>
                             <td colspan="4" class="px-4 py-4 text-right font-semibold">Shipping:</td>
-                            <td class="px-4 py-4 text-right">₹350.00</td>
+                            <td class="px-4 py-4 text-right">{% if order.total_cost >= 999 %}₹0.00 <span class="text-xs text-green-600">(Free)</span>{% else %}₹99.00{% endif %}</td>
                         </tr>
                         <tr>
                             <td colspan="4" class="px-4 py-4 text-right font-semibold">Total:</td>
-                            <td class="px-4 py-4 text-right font-bold">₹{{ order.total_cost|add:"350.00" }}</td>
+                            <td class="px-4 py-4 text-right font-bold">₹{% if order.total_cost >= 999 %}{{ order.total_cost }}{% else %}{{ order.total_cost|add:"99.00" }}{% endif %}</td>
                         </tr>
                     </tfoot>
                 </table>

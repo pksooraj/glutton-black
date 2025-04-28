@@ -5,6 +5,11 @@
   .hero-text {
     padding-left: 1rem;
     padding-right: 1rem;
+    font-size: 2.25rem;
+    line-height: 1.2;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
   }
   
   .product-card {
@@ -16,6 +21,13 @@
     padding-right: 1rem;
     width: 100%;
     max-width: 100%;
+    overflow-x: hidden;
+  }
+  
+  body, html {
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
   }
   
   /* Fix for collections section on mobile */
@@ -24,17 +36,78 @@
     gap: 1.5rem;
   }
   
-  /* Improve hero section on small screens */
-  h1.hero-text {
-    font-size: 2.25rem;
-    line-height: 1.2;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
   /* Better spacing for stats in hero section */
   .mt-12 {
     margin-top: 2rem;
+  }
+  
+  /* Fix image display on mobile */
+  .product-image-container {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 auto !important;
+    width: 100% !important;
+    min-height: 250px !important;
+    max-height: 350px !important;
+    overflow: hidden !important;
+    background-color: #f9f9f9 !important;
+  }
+  
+  .product-main-image {
+    max-width: 100% !important;
+    height: auto !important;
+    object-fit: contain !important;
+    display: block !important;
+    margin: 0 auto !important;
+  }
+  
+  /* Fix product image container */
+  #product-detail-container > div:first-child {
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Improve mobile layout */
+  .w-full-mobile {
+    width: 100% !important;
+  }
+  
+  /* Product detail page improvements for mobile */
+  .md\:flex-row {
+    flex-direction: column !important;
+  }
+  
+  .md\:w-1\/2 {
+    width: 100% !important;
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+  }
+  
+  /* Improve button display on small screens */
+  button, .animated-btn {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Better gallery display on mobile */
+  .gallery-image {
+    height: 60px !important;
+    opacity: 1 !important;
+  }
+  
+  .gallery-thumbnail-container {
+    height: 70px !important;
+    background-color: #f9f9f9 !important;
+  }
+  
+  /* Fix gallery grid on mobile */
+  .grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+  
+  /* Fix loading spinner display */
+  .loading-spinner, .thumbnail-spinner {
+    display: none !important;
   }
   
   /* Ensure testimonials display properly */
@@ -54,6 +127,23 @@
     height: 90vh;
     min-height: 500px;
   }
+  
+  /* Fix for featured products section */
+  .featured-products .grid {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+  
+  /* Improve mobile navigation */
+  .mobile-menu {
+    width: 100%;
+    padding: 1rem;
+  }
+  
+  /* Fix stats display on mobile */
+  .flex.flex-wrap.justify-center.items-center.gap-6 {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
 }
 
 /* Medium devices (tablets) */
@@ -62,10 +152,73 @@
     max-width: 90%;
     margin-left: auto;
     margin-right: auto;
+    text-align: center;
   }
   
   .product-card img {
     height: 250px;
+  }
+  
+  /* Improve product detail layout on tablets */
+  #product-detail-container {
+    flex-direction: column !important;
+  }
+  
+  #product-detail-container > div {
+    width: 100% !important;
+    margin-bottom: 2rem;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  
+  /* Product image container */
+  .product-image-container {
+    max-height: 400px !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    min-height: 300px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background-color: #f9f9f9 !important;
+  }
+  
+  .product-main-image {
+    max-height: 380px !important;
+    width: auto !important;
+    max-width: 100% !important;
+    object-fit: contain !important;
+    margin: 0 auto !important;
+    opacity: 1 !important;
+  }
+  
+  /* Better gallery display on tablets */
+  .gallery-image {
+    height: 70px !important;
+    opacity: 1 !important;
+  }
+  
+  .gallery-thumbnail-container {
+    height: 80px !important;
+    background-color: #f9f9f9 !important;
+  }
+  
+  /* Fix loading spinner display */
+  .loading-spinner, .thumbnail-spinner {
+    display: none !important;
+  }
+  
+  /* Improve button display on tablets */
+  button, .animated-btn {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Improve container spacing */
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    max-width: 100%;
   }
   
   /* Improve collections grid on tablets */
@@ -77,6 +230,20 @@
   /* Better testimonial display */
   .testimonial-slider {
     padding: 0 1rem;
+  }
+  
+  /* Fix container width for tablets */
+  .container {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  
+  /* Improve hero section on tablets */
+  .h-screen {
+    height: 80vh;
+    min-height: 600px;
   }
   
   /* Improve featured products section */
@@ -101,8 +268,57 @@
 
 /* Large devices (desktops) */
 @media (min-width: 769px) and (max-width: 1024px) {
+  .hero-text {
+    max-width: 80%;
+  }
+  
+  .product-card img {
+    height: 300px;
+  }
+  
+  /* Improve product detail layout */
+  .product-image-container {
+    max-height: 450px !important;
+    min-height: 350px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background-color: #f9f9f9 !important;
+  }
+  
+  .product-main-image {
+    max-height: 430px !important;
+    object-fit: contain !important;
+    margin: 0 auto !important;
+    opacity: 1 !important;
+  }
+  
+  .gallery-thumbnail-container {
+    height: 90px !important;
+    background-color: #f9f9f9 !important;
+  }
+  
+  /* Fix loading spinner display */
+  .loading-spinner, .thumbnail-spinner {
+    display: none !important;
+  }
+  
+  /* Ensure product details are properly spaced */
+  #product-detail-container {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  /* Better container spacing */
   .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
     max-width: 90%;
+  }
+  
+  /* Improve gallery display */
+  .gallery-image {
+    height: 80px !important;
   }
 }
 
@@ -110,6 +326,56 @@
 @media (min-width: 1025px) {
   .container {
     max-width: 1200px;
+  }
+  
+  /* Product image container for large screens */
+  .product-image-container {
+    max-height: 550px !important;
+    min-height: 450px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background-color: #f9f9f9 !important;
+  }
+  
+  .product-main-image {
+    max-height: 500px !important;
+    object-fit: contain !important;
+    margin: 0 auto !important;
+    opacity: 1 !important;
+  }
+  
+  .gallery-thumbnail-container {
+    height: 100px !important;
+    background-color: #f9f9f9 !important;
+  }
+  
+  /* Fix loading spinner display */
+  .loading-spinner, .thumbnail-spinner {
+    display: none !important;
+  }
+  
+  /* Improve gallery display on large screens */
+  .gallery-image {
+    height: 90px !important;
+    opacity: 1 !important;
+    transition: all 0.3s ease;
+  }
+  
+  .gallery-image:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Ensure product details are properly spaced */
+  #product-detail-container {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+  }
+  
+  /* Improve button styling on large screens */
+  button.animated-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   }
 }
 

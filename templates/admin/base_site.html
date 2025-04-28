@@ -25,6 +25,8 @@
 {% endblock %}
 
 {% block extrastyle %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static 'admin/css/order_status.css' %}">
 <style>
     :root {
         --primary: #212121;

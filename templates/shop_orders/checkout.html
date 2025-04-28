@@ -39,12 +39,12 @@
                             <p>₹{{ cart.get_subtotal }}</p>
                         </div>
                         <div class="flex justify-between mb-2">
-                            <p>Tax (8%)</p>
-                            <p>₹{{ cart.get_tax }}</p>
+                            <p>Tax (Included in MRP)</p>
+                            <p>₹0.00</p>
                         </div>
                         <div class="flex justify-between mb-2">
                             <p>Shipping</p>
-                            <p>₹350.00</p>
+                            <p>{% if cart.get_subtotal >= 999 %}₹0.00 <span class="text-xs text-green-600">(Free)</span>{% else %}₹99.00{% endif %}</p>
                         </div>
                         <div class="flex justify-between font-bold mt-4 pt-4 border-t border-gray-300">
                             <p>Total</p>

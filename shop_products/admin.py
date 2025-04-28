@@ -46,7 +46,7 @@ class ProductAdmin(admin.ModelAdmin):
     image_thumbnail.short_description = 'Image'
     
     def price_display(self, obj):
-        return f"${obj.price:.2f}"
+        return f"₹{obj.price:.2f}"
     price_display.short_description = 'Price'
     
     def mark_as_featured(self, request, queryset):
@@ -162,7 +162,7 @@ class WishlistItemAdmin(admin.ModelAdmin):
         html = '<div style="display: flex; align-items: center; gap: 15px;">'
         if image and image.image:
             html += format_html('<img src="{}" style="max-height: 100px; max-width: 100px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);" />', image.image.url)
-        html += format_html('<div><h3 style="margin: 0;">{}</h3><p>${:.2f}</p></div>', obj.product.name, obj.product.price)
+        html += format_html('<div><h3 style="margin: 0;">{}</h3><p>₹{:.2f}</p></div>', obj.product.name, obj.product.price)
         html += '</div>'
         return format_html(html)
     product_preview.short_description = 'Product Preview'

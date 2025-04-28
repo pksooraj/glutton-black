@@ -79,11 +79,11 @@
                         </div>
                         <div class="flex justify-between mb-2">
                             <span>Shipping</span>
-                            <span>₹350.00</span>
+                            <span>{% if subtotal >= 999 %}₹0.00 <span class="text-xs text-green-600">(Free)</span>{% else %}₹99.00{% endif %}</span>
                         </div>
                         <div class="flex justify-between">
-                            <span>Tax</span>
-                            <span>₹{{ tax }}</span>
+                            <span>Tax (Included in MRP)</span>
+                            <span>₹0.00</span>
                         </div>
                     </div>
                     

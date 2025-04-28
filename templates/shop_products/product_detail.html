@@ -10,16 +10,67 @@
     const galleryImages = document.querySelectorAll('.gallery-image');
     
     if (mainImage && galleryImages.length > 0) {
+      // Make sure main image is visible with proper styling
+      mainImage.style.display = 'block';
+      mainImage.style.margin = '0 auto';
+      mainImage.style.maxWidth = '100%';
+      mainImage.style.height = 'auto';
+      mainImage.style.objectFit = 'contain';
+      mainImage.style.opacity = '1';
+      
+      // Hide loading spinner if it exists
+      const loadingSpinner = document.querySelector('.loading-spinner');
+      if (loadingSpinner) {
+        loadingSpinner.style.display = 'none';
+      }
+      
+      // Add error handling for main image
+      mainImage.onerror = function() {
+        console.error('Failed to load image:', this.src);
+        this.src = '{% static "images/product-1.jpg" %}';
+        this.style.opacity = '1';
+      };
+      
       galleryImages.forEach(img => {
+        // Add error handling for thumbnails
+        img.onerror = function() {
+          this.src = '{% static "images/product-1.jpg" %}';
+          this.style.opacity = '1';
+        };
+        
+        // Make sure thumbnails are visible
+        img.style.opacity = '1';
+        const thumbnailSpinner = img.parentElement.querySelector('.thumbnail-spinner');
+        if (thumbnailSpinner) {
+          thumbnailSpinner.style.display = 'none';
+        }
+        
         img.addEventListener('click', function() {
           // Update main image src with clicked thumbnail src
-          mainImage.src = this.src;
+          const imgUrl = this.src.split('?')[0]; // Remove any query parameters
+          mainImage.src = imgUrl;
+          mainImage.style.opacity = '1';
           
           // Remove active class from all thumbnails
           galleryImages.forEach(thumb => thumb.parentElement.classList.remove('ring-2', 'ring-black'));
           
           // Add active class to clicked thumbnail
           this.parentElement.classList.add('ring-2', 'ring-black');
+          
+          // Ensure main image is visible with proper styling
+          mainImage.style.display = 'block';
+          mainImage.style.margin = '0 auto';
+          mainImage.style.maxWidth = '100%';
+          mainImage.style.height = 'auto';
+          mainImage.style.objectFit = 'contain';
+          
+          // Scroll to top of image container on mobile
+          if (window.innerWidth < 768) {
+            const imageContainer = document.querySelector('.product-image-container');
+            if (imageContainer) {
+              imageContainer.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+            }
+          }
         });
       });
     }
@@ -27,33 +78,83 @@
 </script>
 {% endblock %}
 
-{% block title %}{{ product.name }} - BLACK{% endblock %}
+{% block title %}{{ product.name }} - Premium Black T-Shirts | BLACK{% endblock %}
+
+{% block meta %}
+<meta name="description" content="{{ product.short_description|default:product.description|truncatechars:160 }} - Premium quality black t-shirts with free shipping on orders over ₹999.">
+<meta name="keywords" content="black t-shirt, premium tshirt, {{ product.name }}, fashion, clothing">
+<meta property="og:title" content="{{ product.name }} - BLACK">
+<meta property="og:description" content="{{ product.short_description|default:product.description|truncatechars:160 }}">
+{% if product.images.exists %}
+<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ product.images.first.image.url }}">
+{% endif %}
+<meta property="og:type" content="product">
+<meta property="og:url" content="{{ request.scheme }}://{{ request.get_host }}{{ product.get_absolute_url }}">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "name": "{{ product.name }}",
+  "description": "{{ product.description }}",
+  "image": "{% if product.images.exists %}{{ request.scheme }}://{{ request.get_host }}{{ product.images.first.image.url }}{% endif %}",
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "INR",
+    "price": "{{ product.price }}",
+    "availability": "https://schema.org/{% if product.in_stock %}InStock{% else %}OutOfStock{% endif %}"
+  }
+}
+</script>
+{% endblock %}
 
 {% block content %}
 <!-- Product Detail Section -->
 <section class="py-16 bg-white">
     <div class="container mx-auto px-4">
-        <div class="flex flex-col md:flex-row -mx-4">
+        <div class="flex flex-col md:flex-row -mx-4" id="product-detail-container">
             <!-- Product Image -->
             <div class="md:w-1/2 px-4 mb-8 md:mb-0" data-aos="fade-right">
                 <div class="sticky top-24">
                     {% if product.images.exists %}
                     {% with main_image=product.images.first %}
-                    <img src="{{ main_image.image.url }}" alt="{{ product.name }}" class="w-full h-auto object-cover shadow-lg rounded product-main-image">
+                    <div class="product-image-container overflow-hidden rounded shadow-lg" style="min-height: 300px; max-height: 500px; display: flex; align-items: center; justify-content: center; background-color: #f9f9f9;">
+                        <!-- Loading spinner that will be hidden when image loads -->
+                        <div class="loading-spinner absolute inset-0 flex items-center justify-center">
+                            <svg class="animate-spin h-10 w-10 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                        </div>
+                        <img src="{% static 'images/product-1.jpg' %}" alt="{{ product.name }}" class="w-full h-auto object-contain product-main-image" loading="eager" style="max-height: 500px; width: 100%; margin: 0 auto; display: block; transition: opacity 0.3s ease-in-out;" 
+                            onload="this.style.opacity='1'; this.parentElement.querySelector('.loading-spinner').style.display='none';"
+                            onerror="this.onerror=null; this.src='{% static 'images/product-1.jpg' %}'; this.style.opacity='1'; this.parentElement.querySelector('.loading-spinner').style.display='none';">
+                    </div>
                     {% endwith %}
                     
                     <!-- Image Gallery -->
-                    {% if product.images.count > 1 %}
-                    <div class="mt-4 grid grid-cols-4 gap-2">
-                        {% for image in product.images.all %}
-                        <div class="cursor-pointer hover:opacity-75 transition duration-300 {% if forloop.first %}ring-2 ring-black{% endif %} rounded">
-                            <img src="{{ image.image.url }}" alt="{{ product.name }}" class="w-full h-auto object-cover rounded gallery-image">
+                    <div class="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+                        {% for i in "1234"|make_list %}
+                        <div class="cursor-pointer hover:opacity-75 transition duration-300 {% if forloop.first %}ring-2 ring-black{% endif %} rounded gallery-thumbnail-container relative" style="height: 80px; display: flex; align-items: center; justify-content: center; overflow: hidden; background-color: #f9f9f9;">
+                            <!-- Thumbnail loading spinner -->
+                            <div class="thumbnail-spinner absolute inset-0 flex items-center justify-center">
+                                <svg class="animate-spin h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                            </div>
+                            <img 
+                                src="{% static 'images/product-'|add:i|add:'.jpg' %}" 
+                                alt="{{ product.name }} - Image {{ forloop.counter }}" 
+                                class="w-full h-auto object-contain rounded gallery-image" 
+                                style="max-height: 100%; max-width: 100%; transition: opacity 0.3s ease-in-out;" 
+                                loading="lazy" 
+                                onload="this.style.opacity='1'; this.parentElement.querySelector('.thumbnail-spinner').style.display='none';" 
+                                onerror="this.onerror=null; this.src='{% static 'images/product-1.jpg' %}'; this.style.opacity='1'; this.parentElement.querySelector('.thumbnail-spinner').style.display='none';">
                         </div>
                         {% endfor %}
                     </div>
-                    {% endif %}
                     {% else %}
-                    <img src="{% static 'images/product-1.jpg' %}" alt="{{ product.name }}" class="w-full h-auto object-cover shadow-lg rounded">
+                    <img src="{% static 'images/product-1.jpg' %}" alt="{{ product.name }}" class="w-full h-auto object-contain shadow-lg rounded product-main-image" style="max-height: 500px; width: 100%; margin: 0 auto; display: block; min-height: 300px;">
                     {% endif %}
                 </div>
             </div>
@@ -61,7 +162,18 @@
             <!-- Product Info -->
             <div class="md:w-1/2 px-4" data-aos="fade-left">
                 <h1 class="text-3xl font-bold mb-4 hero-text">{{ product.name }}</h1>
-                <p class="text-2xl font-medium mb-6 hero-text">₹{{ product.price }}</p>
+                <div class="flex items-center mb-2">
+                    <p class="text-2xl font-medium hero-text">₹{{ product.price }}</p>
+                    <p class="text-lg text-gray-500 line-through ml-3">₹{{ product.price|floatformat:2|add:"200" }}</p>
+                    <span class="ml-3 bg-red-500 text-white px-2 py-1 text-xs rounded">{{ 200|floatformat:0 }}% OFF</span>
+                </div>
+                <p class="text-sm text-gray-600 mb-6">MRP incl. of all taxes</p>
+                <div class="mb-3 bg-green-50 p-2 rounded flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <p class="text-green-700 text-sm">{% if product.price >= 999 %}Free shipping{% else %}₹99 shipping fee (Free on orders above ₹999){% endif %}</p>
+                </div>
                 
                 <div class="mb-8" data-aos="fade-up" data-aos-delay="100">
                     <h2 class="text-lg font-medium mb-2">Description</h2>
@@ -150,7 +262,7 @@
                     </div>
                 </div>
                 <h3 class="text-lg font-medium mb-2">Black T-shirt Design {{ i }}</h3>
-                <p class="text-gray-700 font-bold">$29.99</p>
+                <p class="text-gray-700 font-bold">₹29.99</p>
             </div>
             {% endfor %}
         </div>

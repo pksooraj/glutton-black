@@ -20,6 +20,6 @@ class CartItemAdmin(admin.ModelAdmin):
     )
     
     def total_price(self, obj):
-        return f"${obj.total_price:.2f}"
+        return f"₹{obj.total_price:.2f}"
     
     total_price.short_description = 'Total Price'

@@ -102,13 +102,16 @@ class Cart:
     
     @property
     def tax(self):
-        """Calculate tax (8%)"""
-        return self.subtotal * 0.08
+        """Calculate tax (included in price as per Indian regulations)"""
+        # Tax is already included in the price as per Indian regulations
+        return 0.00
     
     @property
     def shipping(self):
-        """Shipping cost"""
-        return 5.00 if self.subtotal > 0 else 0.00
+        """Shipping cost - Free for orders over ₹999, ₹99 for orders below that"""
+        if self.subtotal >= 999:
+            return 0.00
+        return 99.00 if self.subtotal > 0 else 0.00
     
     @property
     def total(self):

@@ -28,7 +28,7 @@
                                 <td class="px-4 py-4">
                                     <span class="px-2 py-1 rounded-full text-xs {% if order.status == 'delivered' %}bg-green-100 text-green-800{% elif order.status == 'cancelled' %}bg-red-100 text-red-800{% else %}bg-blue-100 text-blue-800{% endif %}">{{ order.get_status_display }}</span>
                                 </td>
-                                <td class="px-4 py-4 text-right">${{ order.total_cost }}</td>
+                                <td class="px-4 py-4 text-right">₹{{ order.total_cost }}</td>
                                 <td class="px-4 py-4 text-center">
                                     <a href="{% url 'shop_orders:order_detail' order.id %}" class="text-blue-600 hover:text-blue-800 transition duration-300">View Details</a>
                                 </td>

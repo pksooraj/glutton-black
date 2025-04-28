@@ -1,0 +1,55 @@
+/* Admin Order Status Styling */
+
+.order-status {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    text-align: center;
+    min-width: 100px;
+}
+
+.status-pending {
+    background-color: #FEF3C7;
+    color: #92400E;
+    border: 1px solid #F59E0B;
+}
+
+.status-processing {
+    background-color: #DBEAFE;
+    color: #1E40AF;
+    border: 1px solid #3B82F6;
+}
+
+.status-shipped {
+    background-color: #D1FAE5;
+    color: #065F46;
+    border: 1px solid #10B981;
+}
+
+.status-delivered {
+    background-color: #ECFDF5;
+    color: #064E3B;
+    border: 1px solid #059669;
+}
+
+.status-cancelled {
+    background-color: #FEE2E2;
+    color: #991B1B;
+    border: 1px solid #EF4444;
+}
+
+/* Improve action buttons */
+.button {
+    padding: 6px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+.button:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}

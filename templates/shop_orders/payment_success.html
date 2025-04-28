@@ -17,7 +17,7 @@
                 <h2 class="text-xl font-semibold mb-2">Order Details</h2>
                 <p class="mb-1"><strong>Order Number:</strong> #{{ order.id }}</p>
                 <p class="mb-1"><strong>Date:</strong> {{ order.created_at|date:"F j, Y" }}</p>
-                <p><strong>Total Amount:</strong> ${{ order.total_cost }}</p>
+                <p><strong>Total Amount:</strong> ₹{{ order.total_cost }}</p>
             </div>
             
             <p class="mb-6">We've sent a confirmation email to {{ order.email }} with all the details of your purchase. Your order is now being processed and will be shipped soon.</p>

@@ -22,7 +22,7 @@ def cart_detail(request):
     from decimal import Decimal
     subtotal = sum(item.total_price for item in cart_items)
     tax = subtotal * Decimal('0.08')  # 8% tax rate
-    total = subtotal + tax + Decimal('5.00')  # $5 shipping
+    total = subtotal + tax + Decimal('350.00')  # ₹350 shipping
     
     return render(request, 'shop_cart/cart_detail.html', {
         'cart_items': cart_items,
